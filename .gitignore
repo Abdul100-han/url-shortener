@@ -1,0 +1,14 @@
+# Node
+node_modules/
+npm-debug.log
+
+# React
+frontend/.env
+frontend/build/
+
+# IDE
+.vscode/
+.idea/
+
+# Environment variables
+.env
