@@ -1,28 +1,31 @@
 class UrlModel {
     constructor() {
-      this.urls = [];
-      this.urlStats = {};
-    }
-  
-    createUrl(originalUrl, shortUrl) {
-      const urlEntry = {
-        originalUrl,
-        shortUrl,
-        createdAt: new Date(),
-        visits: 0
-      };
-      this.urls.push(urlEntry);
-      this.urlStats[shortUrl] = {
-        visits: 0,
-        lastAccessed: null,
-        createdAt: new Date()
-      };
-      return urlEntry;
-    }
-  
-    getUrlByShortCode(shortUrl) {
-      return this.urls.find(url => url.shortUrl.includes(shortUrl));
-    }
+        this.urls = [];
+        this.urlStats = {};
+      }
+    
+      createUrl(originalUrl, shortUrl) {
+        const shortCode = shortUrl.split('/').pop();
+        const urlEntry = {
+          originalUrl,
+          shortUrl,
+          shortCode,  // Add this line
+          createdAt: new Date(),
+          visits: 0
+        };
+        this.urls.push(urlEntry);
+        this.urlStats[shortCode] = {  // Use shortCode as key
+          visits: 0,
+          lastAccessed: null,
+          createdAt: new Date()
+        };
+        return urlEntry;
+      }
+    
+      getUrlByShortCode(shortCode) {  // Change parameter name
+        return this.urls.find(url => url.shortCode === shortCode);
+      }
+    
   
     getAllUrls() {
       return this.urls;
